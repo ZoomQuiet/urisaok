@@ -1,9 +1,8 @@
-http = require 'http'
-port = process.env.PORT || 8001
 
-http.createServer (req,res) -> 
-    res.writeHead 200, {'Content-Type': 'text/plain'}
-    res.end 'Hollo World\n\tfrom no.de{v12.2.13}'
-.listen port
+app = require('express').createServer();
 
-console.log "Listening on port " + port
+app.configure ->
+    app.get '/', (req, res) -> 
+        res.send('Hello World!')
+
+app.listen process.env.PORT || 8001
