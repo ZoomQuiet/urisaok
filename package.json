@@ -1,10 +1,7 @@
 {   
-    "name"       : "urisaok.no.de",
-    "version"    : "12.2.13",
+    "name": "urisaok.no.de",
+    "version": "12.2.13",
     "author": "Zoom.Quiet <zoomquiet+node@gamil.com>",
     "description": "have fun with no.de",
-    "scripts"    : { 
-        "start": "coffee app.coffee", 
-        "chk": "coffee chk.coffee"  
-        },
+    "scripts": { "start": "coffee app.coffee" }
 }
