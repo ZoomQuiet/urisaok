@@ -1,9 +1,6 @@
-mate = require 'coffeemate'
+require('zappa') ->
+  @get '/': 'hi'
 
-mate.get '/', ->
-  @resp.end 'Hello World'
-
-mate.listen 8001
 
 /*
 var http = require('http');
