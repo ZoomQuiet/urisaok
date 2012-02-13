@@ -1,3 +1,11 @@
+mate = require '../../coffeemate'
+
+mate.get '/', ->
+  @resp.end 'Hello World'
+
+mate.listen 3000
+
+/*
 var http = require('http');
  
 var server = http.createServer(function (req, res) {
@@ -7,3 +15,4 @@ var server = http.createServer(function (req, res) {
  
 server.listen(process.env.PORT || 8001);
 
+*/
