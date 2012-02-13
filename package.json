@@ -3,5 +3,6 @@
     "version": "12.2.13",
     "author": "Zoom.Quiet <zoomquiet+node@gamil.com>",
     "description": "have fun with no.de",
+    "dependencies": { "express": "2.*", "coffee-script": "1.*" },
     "scripts": { "start": "coffee app.coffee" }
 }
