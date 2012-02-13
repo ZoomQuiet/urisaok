@@ -19,8 +19,8 @@ app.get '/', (req, res) ->
         """)
 
 app.post '/chk', (req, res) -> 
-    #params = req.body
-    res.send(req.body.uri)
+    params = req.query.content  #req.body.uri
+    res.send(params)
 
 
 # Bind Application
