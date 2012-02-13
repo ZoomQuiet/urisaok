@@ -3,7 +3,7 @@ app = require('express').createServer();
 
 app.configure ->
     #app.use express.methodOverride()
-    #app.use express.bodyParser()
+    app.use express.bodyParser()
     #app.use app.router
     app.get '/', (req, res) -> 
         res.send("""Hello World!
