@@ -10,7 +10,7 @@ app.configure ->
             for URIsaok
             {v12.02.13}
             """)
-    app.get '/chk', (req, res) -> 
+    app.post '/chk', (req, res) -> 
         #params = req.body
         res.send(req.query.content)
 
