@@ -3,8 +3,8 @@ app = exp.createServer()
 #app = require('express').createServer();
 
 app.configure () ->
-    app.use exp.methodOverride()
-    app.use exp.bodyParser()
+    app.set exp.methodOverride()
+    app.set exp.bodyParser()
     #app.use app.router
 app.get '/', (req, res) -> 
     res.send("""Hello World!
