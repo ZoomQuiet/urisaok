@@ -1,11 +1,13 @@
 express = require 'express'
+#app = require('express').createServer();
+
 # about express
 app = express.createServer()
-app.configure () ->
+app.configure ()->
     app.use express.methodOverride()
     app.use express.bodyParser()
     app.use app.router
-#app = require('express').createServer();
+
 # ====== API ========
 app.get '/', (req, res) -> 
     res.send("""Hello World!
@@ -19,5 +21,6 @@ app.post '/chk', (req, res) ->
 
 
 # Bind Application
-app.listen 8001
+port = 8001
+app.listen port
 console.log "run server. port #{port}."
