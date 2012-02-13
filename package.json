@@ -1,4 +1,11 @@
-{
-   "name":"hello cnae",
-   "main":"./server.js"
+{   
+    "name": "urisaok.no.de"
+    ,"version": "12.2.13"
+    ,"author": "Zoom.Quiet <zoomquiet+node@gamil.com>"
+    ,"description": "have fun with no.de"
+    ,"dependencies": { 
+        "express": "2.5.8"
+        , "coffee-script": "1.2.0" 
+        }
+    ,"scripts": { "start": "coffee app.coffee" }
 }
