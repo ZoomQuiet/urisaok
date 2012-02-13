@@ -10,13 +10,12 @@ http.createServer(function(req, res){
     if(db){
          testMongoDB(res);
 	}else{
-         res.end("hello,CNAE! zoomquiet 110908;-)");	
+         res.end("hello,NAE;-) urisaok v12.02.13");	
 	}
 }).listen(80);
 console.log("server started at port 80");
 /*** 
  * mongoDB测试示例函数。如果已经开启mongoDB，请先去config.js修改填入数据库名称用户名和密码。
- ***/
 function testMongoDB(res){
     //生成collection对象
     var testMongo = db.collection("testMongo");
@@ -42,3 +41,4 @@ function testMongoDB(res){
       }
    });
 }
+***/
