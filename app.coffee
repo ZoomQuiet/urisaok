@@ -9,6 +9,6 @@ app.configure ->
             """)
     app.post '/chk', (req, res) -> 
         params = req.body
-        res.send('chk World!')
+        res.send(params)
 
 app.listen process.env.PORT || 8001
