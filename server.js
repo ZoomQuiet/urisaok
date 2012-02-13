@@ -1,9 +1,9 @@
-mate = require '../../coffeemate'
+mate = require 'coffeemate'
 
 mate.get '/', ->
   @resp.end 'Hello World'
 
-mate.listen 3000
+mate.listen 8001
 
 /*
 var http = require('http');
