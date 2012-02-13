@@ -1,0 +1,10 @@
+{
+    "name"       : "urisaok.no.de",
+    "version"    : "12.2.13",
+    "description": "have fun with no.de",
+    "scripts"    : { 
+        //"start": "node ./app" 
+        "start": "coffee app.coffee" 
+        ,"chk": "coffee chk.coffee" 
+        }
+}
