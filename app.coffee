@@ -8,6 +8,9 @@ app.configure ()->
     app.use express.bodyParser()
     app.use app.router
 
+app.configure 'development', ()->
+  app.use express.errorHandler({ dumpExceptions: true, showStack: true })
+
 # ====== API ========
 app.get '/', (req, res) -> 
     res.send("""Hello World!
