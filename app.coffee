@@ -7,8 +7,8 @@ app.configure ->
             for URIsaok
             {v12.02.13}
             """)
-    app.post '/chk', (req, res) -> 
-        params = req.body
-        res.send(params)
+    app.get '/chk', (req, res) -> 
+        #params = req.body
+        res.send(req.query.content)
 
 app.listen process.env.PORT || 8001
