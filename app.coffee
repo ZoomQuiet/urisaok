@@ -11,7 +11,7 @@ app.configure ->
             {v12.02.13}
             """)
     app.post '/chk', (req, res) -> 
-        #params = req.body
-        res.send("req.query.content")
+        params = req.body
+        res.send(params)
 
 app.listen process.env.PORT || 8001
