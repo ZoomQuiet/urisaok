@@ -1,17 +1,6 @@
+mate = require 'coffeemate'
 
-app = require('express').createServer();
+mate.get '/', ->
+  @resp.end 'Hello World'
 
-app.configure ->
-    #app.use express.methodOverride()
-    #app.use express.bodyParser()
-    #app.use app.router
-    app.get '/', (req, res) -> 
-        res.send("""Hello World!
-            for URIsaok
-            {v12.02.13}
-            """)
-    app.post '/chk', (req, res) -> 
-        params = req.body
-        res.send("req.query.content")
-
-app.listen process.env.PORT || 8001
+mate.listen 8001
