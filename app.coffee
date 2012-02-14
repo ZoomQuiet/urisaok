@@ -24,4 +24,5 @@ app.post '/chk', (req, res) ->
   res.send req.body.uri
 
 app.listen 8001
+
 console.log "Express server listening on port %d in %s mode", app.address().port, app.settings.env
