@@ -1,5 +1,6 @@
 crypto = require('crypto')
 http = require('http')
+fetch = require('fetch').fetchUrl
 express = require("express")
 app = module.exports = express.createServer()
 
@@ -15,27 +16,29 @@ app.get "/", (req, res) ->
     res.send "hollo..."
 
 app.post '/chk', (req, res) ->
-    #console.log req.body
-    #console.log req.body.uri
-    #console.log checkForValidUrl(req.body.uri)
     askurl = checkForValidUrl(req.body.uri)
-    options = 
-        host: 'open.pc120.com'
-        port: 80
-        path: askurl
-    
-    data = ''
-    http.get options, (res) ->
-        res.on 'data', (chunk) ->
-            data += chunk.toString()
-        res.on 'end', () ->
-            console.log data
-    res.send askurl+"\n\t"+data
+    answer = ''
+    fetch ASKHOST+askurl , (error, meta, body) ->
+        if error
+            console.log "ERROR", error.message || error
+        console.log meta
+        answer = JSON.parse(body)   #body.toString()
+        #console.log PHISHTYPE(answer.phish)
+        res.send "/cnk KSC::\n\t"+PHISHTYPE(answer.phish)
+    #res.send "\n\t..."+answer
+
+PHISHTYPE = (code) ->
+    switch code.toString()
+      when "-1" then 'UNKNOW'
+      when "0"  then 'GOOD'
+      when "1"  then 'PHISH'
+      when "2"  then 'MAYBE PHISH'
 
 APPKEY = "k-60666"
 SECRET = "99fc9fdbc6761f7d898ad25762407373"
 ASKHOST = "http://open.pc120.com"
 ASKTYPE = "/phish/?"
+    
 
 checkForValidUrl = (uri) ->
     crtURI = Buffer(uri).toString('base64')
@@ -47,6 +50,6 @@ checkForValidUrl = (uri) ->
     #ASKHOST+signbase+"&sign="+sign
     signbase+"&sign="+sign
 
-app.listen 80
+app.listen 9001
 
 console.log "Express server listening on port %d in %s mode", app.address().port, app.settings.env
