@@ -19,6 +19,15 @@
     +-- ...
 
 
+## 发布
+
+### http://urisaok.sinaapp.com
+
+- 当前接口: http://urisaok.sinaapp.com/chk
+-- POST 想查询的 URL
+-- 从金山云安全服务 返回是否安全
+
+
 ## 仓库
 
 
