@@ -38,7 +38,6 @@ APPKEY = "k-60666"
 SECRET = "99fc9fdbc6761f7d898ad25762407373"
 ASKHOST = "http://open.pc120.com"
 ASKTYPE = "/phish/?"
-    
 
 checkForValidUrl = (uri) ->
     crtURI = Buffer(uri).toString('base64')
@@ -50,6 +49,6 @@ checkForValidUrl = (uri) ->
     #ASKHOST+signbase+"&sign="+sign
     signbase+"&sign="+sign
 
-app.listen 9001
+app.listen 80
 
 console.log "Express server listening on port %d in %s mode", app.address().port, app.settings.env
