@@ -39,14 +39,14 @@ https://github.com/ZoomQuiet/urisaok
 - 利用Hg 的分支功能,针对不同目的的代码进行了组织:
 - https://bitbucket.org/ZoomQuiet/ok.urisa
 
-
+```
     +-- default     默认分支包含主要的文档
     +-- GAE         可部署在GAE上的版本
     +-- SAE         可部署在SAE上的版本
     +-- NAE         可部署在NAE上的版本
     +-- bootle      本地的web srv. 版本
     +-- tools       周边应用工具
-
+```
 
 
 ## 记要
