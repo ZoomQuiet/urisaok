@@ -16,5 +16,5 @@
         , "express": "2.5.8"
         }
     ,"scripts": { "start": "coffee app.coffee" }
-    "engines": { "node":">= 0.5.0 < 0.7.0" }
+    ,"engines": { "node":">= 0.5.0 < 0.7.0" }
 }
