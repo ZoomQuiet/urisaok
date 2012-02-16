@@ -1,6 +1,5 @@
 crypto = require('crypto')
 http = require('http')
-fetch = require('fetch').fetchUrl
 express = require("express")
 app = module.exports = express.createServer()
 

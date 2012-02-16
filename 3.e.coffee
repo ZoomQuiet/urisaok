@@ -1,6 +1,5 @@
-app = require('express').createServer()
-#express = require("express")
-#app = module.exports = express.createServer()
+express = require("express")
+app = module.exports = express.createServer()
 
 app.configure ->
     app.use express.methodOverride()
