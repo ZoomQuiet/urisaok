@@ -49,6 +49,6 @@ app.post '/chk', (req, res) ->
         res.send "/cnk KSC::\t"+PHISHTYPE(answer.phish)
     #res.send "\n\t..."+answer
 
-app.listen 8001
+app.listen 80
 
 console.log "Express server listening on port %d in %s mode", app.address().port, app.settings.env
