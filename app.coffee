@@ -13,7 +13,11 @@ app.configure "production", ->
     app.use express.errorHandler()
 
 app.get "/", (req, res) ->
-    res.send "hollo..."
+    res.send '''Hollo there!
+        this is URIsaOK v12.02.16, usage as:
+        $ curl --data "uri=http://douban.com" http://urisaok.no.de/chk
+        doc: https://github.com/ZoomQuiet/urisaok
+        '''
 
 PHISHTYPE = (code) ->
     switch code.toString()
