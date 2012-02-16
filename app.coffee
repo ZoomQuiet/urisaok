@@ -24,7 +24,7 @@ app.post '/chk', (req, res) ->
         console.log meta
         answer = JSON.parse(body)   #body.toString()
         #console.log PHISHTYPE(answer.phish)
-        res.send "/cnk KSC::\n\t"+PHISHTYPE(answer.phish)
+        res.send "/cnk KSC::\t"+PHISHTYPE(answer.phish)
     #res.send "\n\t..."+answer
 
 PHISHTYPE = (code) ->
@@ -49,6 +49,6 @@ checkForValidUrl = (uri) ->
     #ASKHOST+signbase+"&sign="+sign
     signbase+"&sign="+sign
 
-app.listen 80
+app.listen 8001
 
 console.log "Express server listening on port %d in %s mode", app.address().port, app.settings.env
