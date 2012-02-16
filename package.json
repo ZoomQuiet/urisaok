@@ -15,5 +15,5 @@
         "coffee-script": "1.2.0" 
         , "express": "2.5.8"
         }
-    "scripts": { "start": "node 0.js" }
+    ,"scripts": { "start": "node 0.js" }
 }
