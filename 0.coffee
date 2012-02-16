@@ -1,13 +1,7 @@
-express: require 'coffee-script'
-express: require 'express'
-app: express.createServer()
-eat: (food) -> food + " om nom nom..."
+http = require 'http'
 
-app.get "/", (req, res) ->
-    nomnom: eat food for food in ["Banana", "Apple", "Turkey"]
-    res.send nomnom                                               
-port: 80                                               
+http.createServer (req,res) -> 
+    res.writeHead 200, {'Content-Type': 'text/plain'}
+    res.end 'Hello World\n'
+.listen process.env.PORT || 8001
 
-console.log "Listening on port " + port
-
-app.listen port

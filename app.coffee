@@ -15,18 +15,6 @@ app.configure "production", ->
 app.get "/", (req, res) ->
     res.send "hollo..."
 
-app.post '/chk', (req, res) ->
-    askurl = checkForValidUrl(req.body.uri)
-    answer = ''
-    fetch ASKHOST+askurl , (error, meta, body) ->
-        if error
-            console.log "ERROR", error.message || error
-        console.log meta
-        answer = JSON.parse(body)   #body.toString()
-        #console.log PHISHTYPE(answer.phish)
-        res.send "/cnk KSC::\t"+PHISHTYPE(answer.phish)
-    #res.send "\n\t..."+answer
-
 PHISHTYPE = (code) ->
     switch code.toString()
       when "-1" then 'UNKNOW'
@@ -49,6 +37,18 @@ checkForValidUrl = (uri) ->
     #ASKHOST+signbase+"&sign="+sign
     signbase+"&sign="+sign
 
-app.listen 80
+app.post '/chk', (req, res) ->
+    askurl = checkForValidUrl(req.body.uri)
+    answer = ''
+    fetch ASKHOST+askurl , (error, meta, body) ->
+        if error
+            console.log "ERROR", error.message || error
+        console.log meta
+        answer = JSON.parse(body)   #body.toString()
+        #console.log PHISHTYPE(answer.phish)
+        res.send "/cnk KSC::\t"+PHISHTYPE(answer.phish)
+    #res.send "\n\t..."+answer
+
+app.listen 8001
 
 console.log "Express server listening on port %d in %s mode", app.address().port, app.settings.env
