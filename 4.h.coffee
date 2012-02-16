@@ -44,6 +44,7 @@ app.post '/chk', (req, res) ->
             data += chunk.toString()
         pres.on 'end', () ->
             answer = JSON.parse(data)
+            console.log answer
             console.log answer.success
             #pres.end answer.success
     res.send "\n\t..."+answer

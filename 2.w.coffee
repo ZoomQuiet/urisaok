@@ -15,4 +15,4 @@ console.log "Hello World"
 w.run 8001
     .post postRouter  
     .get getRouter 
-    .use w.bodyParser
+    #.use w.bodyParser
