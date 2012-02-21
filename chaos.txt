@@ -1,0 +1,13 @@
+$ curl -O http://wiki.joyent.com/download/attachments/1639170/mongodbnode.sh
+$ bash mongodbnode.sh 2.0.2
+
+
+Congratulations, MongoDB looks like it was successfully installed.
+The mongo binaries are in /root/local/bin and the data is in /root/local/var/mongodb
+To start using MongoDB, run the following two commands:
+
+  source ~/.bashrc
+  pfexec svcadm enable mongodb
+
+For security purposes, MongoDB is only listening for connections from 127.0.0.1.
+
