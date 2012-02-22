@@ -14,6 +14,7 @@
     ,"dependencies": { 
         "coffee-script": "1.2.0" 
         , "express": "2.5.8"
+        , "mongoskin ": "0.3.0"
         }
     ,"scripts": { "start": "coffee app.coffee" }
 }
