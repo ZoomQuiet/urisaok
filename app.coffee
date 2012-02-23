@@ -20,6 +20,9 @@ app.get "/", (req, res) ->
     res.send '''Hollo there!
         this is URIsaOK v12.02.16, usage as:
         $ curl --data "uri=http://douban.com" http://urisaok.no.de/chk
+        or
+        $ curl --data "uri=http://douban.com" http://urisaok.no.de/qchk
+            ~ use loc MongoDB quickly return checked uri KSC result ;-)
         doc: https://github.com/ZoomQuiet/urisaok
         '''
 PHISHTYPE = (code) ->
@@ -52,15 +55,16 @@ app.post '/chk', (req, res) ->
             console.log "ERROR", error.message || error
         else
             console.log meta
+            console.log body.toString()
             answer = JSON.parse(body)   #body.toString()
-            #console.log PHISHTYPE(answer.phish)
+            console.log PHISHTYPE(answer.phish)
             res.send "/cnk KSC::\t"+PHISHTYPE(answer.phish)
+            #res.send "/cnk KSC::\t"+answer.phish
     #res.send "\n\t..."+answer
 
-
 #120221 appended Mongo support
-#db = require('mongoskin').db('localhost:27017/urisa?auto_reconnect')
-db = require('mongoskin').db('localhost:27017/chaos?auto_reconnect')
+db = require('mongoskin').db('localhost:27017/urisa?auto_reconnect')
+#db = require('mongoskin').db('localhost:27017/chaos?auto_reconnect')
 chked = db.collection('chked')
 ### Mongo doc design:
 'uri':""
@@ -70,11 +74,10 @@ chked = db.collection('chked')
 ###
 app.post '/qchk', (req, res) ->
     uri = req.body.uri.split("/" ,3)[2]
-    #console.log uri
+    console.log uri
     timestamp = Date.parse(new Date())/1000+".512"
     phishcode = "NULL"
     clientip = req.header('x-forwarded-for') || req.connection.remoteAddress
-    #db.collection('test').find({'uri':uri}).toArray (err, result) ->
     chked.find({'uri':uri}).toArray (err, result) ->
         if err
             console.log err
@@ -107,8 +110,6 @@ app.post '/qchk', (req, res) ->
                 console.log result
                 console.log "/cnk KSC::\t"+PHISHTYPE result[0].phishcode
                 res.send "/cnk KSC::\t"+PHISHTYPE result[0].phishcode
-    
-    #collec.insert(doc)
 
     #res.send "\n\tQuickly chk with MongoDB!"
 
