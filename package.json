@@ -1,0 +1,41 @@
+{   
+    "name": "urisaok.cnodejs.net"
+    ,"version": "12.2.27"
+    ,"author": "Zoom.Quiet <zoomquiet+node@gamil.com>"
+    ,"license" : "BSD"
+    ,"description": "fun KSC with NAE base cnodejs.org..."
+    ,"contributors" : [
+        {   "name":"ZQ"
+            ,"email":"zoomquiet+nae@gmail.com"
+            }
+        ]
+    ,"dependencies": { 
+        "coffee-script": "1.2.0" 
+        , "express": "2.5.8"
+        , "mongoskin ": "0.3.0"
+        , "fetch ": "0.2.7"
+        }
+    ,"scripts": { 
+        "start": "coffee app.coffee"
+        ,"test":"vows --spec --isolate"
+        }
+    ,"main" : "server.js"
+    ,"devDependencies" : {
+        "vows":"0.5.x"
+        ,"request":"2.1.x"
+        }
+    ,"engine" : {
+        "node":">=0.4"
+        }
+    ,"customHost" : "cnodejs.net"
+    ,"keywords": ["express"
+        , "coffee-script"
+        , "NAE"
+        , "cnodejs.org"
+        , "ksc"
+        , "rest"
+        , "restful"
+        ]
+    ,"repository": "git://github.com/ZoomQuiet/urisaok.git"
+}
+

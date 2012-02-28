@@ -1,8 +1,3 @@
-require('zappa') ->
-  @get '/': 'hi'
-
-
-/*
 var http = require('http');
  
 var server = http.createServer(function (req, res) {
@@ -12,4 +7,3 @@ var server = http.createServer(function (req, res) {
  
 server.listen(process.env.PORT || 8001);
 
-*/
