@@ -10,10 +10,10 @@
             }
         ]
     ,"dependencies": { 
-        "coffee-script": "1.2.0" 
-        , "express": "2.5.8"
-        , "mongoskin ": "0.3.0"
-        , "fetch ": "0.2.7"
+        "coffee-script": ">=1.2.x" 
+        , "express": ">=2.5.x"
+        , "mongoskin ": ">=0.3.x"
+        , "fetch ": ">=0.2.x"
         }
     ,"scripts": { 
         "start": "coffee app.coffee"
