@@ -1,5 +1,6 @@
 -- try openresty easy creat RESTful API srv.
 ngx.req.read_body()
+VERTION="URIsAok4openresty v12.03.6"
 PHISHTYPE = {["-1"]='UNKNOW'
     ,["0"]='GOOD'
     ,["1"]='PHISH'
@@ -26,10 +27,14 @@ if method == 'POST' then
     ngx.say("encode_base64:\t",ngx.encode_base64(args.uri))
     ngx.say("ngx.now():\t",ngx.now())
 
-    urili = string._split(uri,"/",4)
-    --print(urili)
-    --for k,v in next,  string._split(uri,"/",4) do ngx.say(v) end
-    ngx.say("string._split:\t",urili[3])
+    --urili = _splitstr(uri,"/")
+    local str, sep = args.uri, "/"
+    print (str, sep)
+    fields = {}
+    str:gsub("([^"..sep.."]*)"..sep, function(c) table.insert(fields, c) end)
+    --for k,v in next,  fields do ngx.say(v) end
+    ngx.say("str:gsub\t",fields[3])
+    --ngx.say("string._split:\t",urili[3])
     --[[
     ok, html = _fetch_uri("http://open.pc120.com/phish/")
     if ok then
@@ -41,20 +46,16 @@ else
     ngx.say('only POST chk me;-)')
 end
 
-curl = require "luacurl"
-function _fetch_uri(url, c)
-    local result = { }
-    if c == nil then 
-        c = curl.new() 
-    end
-    c:setopt(curl.OPT_URL, url)
-    c:setopt(curl.OPT_WRITEDATA, result)
-    c:setopt(curl.OPT_WRITEFUNCTION, function(tab, buffer)
-        table.insert(tab, buffer)
-        return #buffer
-    end)
-    local ok = c:perform()
-    return ok, table.concat(result)
+-- intr. func.
+function _splitstr(restr,regexp )
+    -- body
+    --assert(restr ~= '')
+    --assert(regexp ~= '')
+    local str, sep = restr, regexp
+    print (str, sep)
+    fields = {}
+    str:gsub("([^"..sep.."]*)"..sep, function(c) table.insert(fields, c) end)
+    return fields
 end
 
 function string:_split(sSeparator, nMax, bRegexp)
@@ -76,4 +77,20 @@ function string:_split(sSeparator, nMax, bRegexp)
         aRecord[nField] = self:sub(nStart)
     end
     return aRecord
+end
+
+curl = require "luacurl"
+function _fetch_uri(url, c)
+    local result = { }
+    if c == nil then 
+        c = curl.new() 
+    end
+    c:setopt(curl.OPT_URL, url)
+    c:setopt(curl.OPT_WRITEDATA, result)
+    c:setopt(curl.OPT_WRITEFUNCTION, function(tab, buffer)
+        table.insert(tab, buffer)
+        return #buffer
+    end)
+    local ok = c:perform()
+    return ok, table.concat(result)
 end
