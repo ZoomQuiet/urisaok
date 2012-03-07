@@ -63,7 +63,10 @@ app.post '/chk', (req, res) ->
     #res.send "\n\t..."+answer
 
 #120221 appended Mongo support
+#db = require('mongoskin').db('localhost:27017/urisa?auto_reconnect')
 db = require('mongoskin').db('localhost:27017/urisa?auto_reconnect')
+
+#mongoc2.grandcloud.cn:10005/zq --username test --password "1q2w3e4r"
 #db = require('mongoskin').db('localhost:27017/chaos?auto_reconnect')
 chked = db.collection('chked')
 ### Mongo doc design:
