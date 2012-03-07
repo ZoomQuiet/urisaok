@@ -62,6 +62,13 @@ else
     ngx.say(chkURI)
     ok, html = _fetch_uri(chkURI)
     if ok then
-        ngx.say("KCS /phish?:\t",html)
+        local cjson = require "cjson"
+        json = cjson.decode(html)
+        if 1 == json.success then
+            ngx.log(ngx.INFO,"\n\tKCS say:  ",html,"\n\t")
+            ngx.say("KCS /phish?:\t", PHISHTYPE[tostring(json.phish)])
+        else
+            ngx.say("KCS say:\t",html)
+        end
     end
 end
