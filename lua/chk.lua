@@ -26,9 +26,10 @@ if method == 'POST' then
     ngx.say("encode_base64:\t",ngx.encode_base64(args.uri))
     ngx.say("ngx.now():\t",ngx.now())
 
-    urili = string.split(uri,"/",4)
-    --for k,v in next,  string.split(uri,"/",4) do ngx.say(v) end
-    ngx.say("string.split:\t",urili[3])
+    urili = string._split(uri,"/",4)
+    --print(urili)
+    --for k,v in next,  string._split(uri,"/",4) do ngx.say(v) end
+    ngx.say("string._split:\t",urili[3])
     --[[
     ok, html = _fetch_uri("http://open.pc120.com/phish/")
     if ok then
@@ -56,7 +57,7 @@ function _fetch_uri(url, c)
     return ok, table.concat(result)
 end
 
-function string:split(sSeparator, nMax, bRegexp)
+function string:_split(sSeparator, nMax, bRegexp)
     assert(sSeparator ~= '')
     assert(nMax == nil or nMax >= 1)
     local aRecord = {}
