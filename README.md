@@ -21,6 +21,24 @@
 
 ## 发布
 
+
+### http://urisaok.cnodejs.net
+
+当前接口:
+
+- http://urisaok.cnodejs.net/chk
+    
+    - POST 想查询的 URL
+    - 从金山云安全服务 返回是否安全
+
+- http://urisaok.cnodejs.net/qchk
+    
+    - POST 想查询的 URL
+    - 检查本地 MongoDB 是否有历史结果
+    - 否则 从金山云安全服务 返回是否安全
+
+
+
 ### http://urisaok.sinaapp.com
 
 - 当前接口: http://urisaok.sinaapp.com/chk
@@ -31,10 +49,18 @@
 
 ### http://urisaok.no.de
 
-- 当前接口: http://urisaok.no.de/chk
+当前接口:
+
+- http://urisaok.no.de/chk
     
     - POST 想查询的 URL
     - 从金山云安全服务 返回是否安全
+
+- http://urisaok.no.de/qchk
+    
+    - POST 想查询的 URL
+    - 检查本地 MongoDB 是否有历史结果
+    - 否则 从金山云安全服务 返回是否安全
 
 
 ## 仓库
