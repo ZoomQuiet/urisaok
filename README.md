@@ -95,6 +95,7 @@ https://github.com/ZoomQuiet/urisaok
 
 ## 记要
 
+    120414  Zoom.Quiet 和 NAE 环境
     120214  Zoom.Quiet 和no.de 生产仓库同步
     120212  Zoom.Quiet 迁移到 github
     110323  Zoom.Quiet 创建
