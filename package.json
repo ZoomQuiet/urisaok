@@ -10,22 +10,14 @@
             }
         ]
     ,"dependencies": { 
-        "coffee-script": ">=1.2.x" 
-        , "express": ">=2.5.x"
+        "coffee-script": ">=1.2.0" 
+        , "express": ">=2.5.8"
         , "mongoskin ": ">=0.3.x"
         , "fetch ": ">=0.2.x"
         }
-    ,"scripts": { 
-        "start": "coffee app.coffee"
-        ,"test":"vows --spec --isolate"
-        }
-    ,"main" : "server.js"
-    ,"devDependencies" : {
-        "vows":"0.5.x"
-        ,"request":"2.1.x"
-        }
+    ,"main" : "chk.js"
     ,"engine" : {
-        "node":">=0.4"
+        "node":">=0.6"
         }
     ,"customHost" : "cnodejs.net"
     ,"keywords": ["express"

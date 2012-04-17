@@ -2,9 +2,7 @@
 fetch = require('fetch').fetchUrl
 #120211 appended base web dev support
 crypto = require('crypto')
-
 http = require('http')
-#io = require('socket.io')
 
 express = require("express")
 app = module.exports = express.createServer()
@@ -115,6 +113,6 @@ app.post '/qchk', (req, res) ->
 
     #res.send "\n\tQuickly chk with MongoDB!"
 
-app.listen 80
+app.listen 8001
 
 console.log "Express server listening on port %d in %s mode", app.address().port, app.settings.env
