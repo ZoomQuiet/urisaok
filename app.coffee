@@ -39,10 +39,7 @@ checkForValidUrl = (uri) ->
     crtURI = Buffer(uri).toString('base64')
     timestamp = Date.parse(new Date())/1000+".512"
     signbase = ASKTYPE+"appkey="+APPKEY+"&q="+crtURI+"&timestamp="+ timestamp
-    #console.log signbase
-    #console.log signbase+SECRET
     sign = crypto.createHash('md5').update(signbase+SECRET).digest("hex")
-    #ASKHOST+signbase+"&sign="+sign
     signbase+"&sign="+sign
 
 app.post '/chk', (req, res) ->
@@ -62,9 +59,6 @@ app.post '/chk', (req, res) ->
 
 #120221 appended Mongo support
 db = require('mongoskin').db('8b2qv5kfx2imv:7okgyd5s6d2@127.0.0.1:20088/mYoQDTSPcCca?auto_reconnect')
-#8b2qv5kfx2imv:7okgyd5s6d2@127.0.0.1:20088/mYoQDTSPcCca
-#mongo 127.0.0.1:20088/mYoQDTSPcCca -u 8b2qv5kfx2imv -p 7okgyd5s6d2
-#db = require('mongoskin').db('localhost:27017/chaos?auto_reconnect')
 chked = db.collection('chked')
 ### Mongo doc design:
 'uri':""
@@ -89,7 +83,6 @@ app.post '/qchk', (req, res) ->
                 fetch ASKHOST+askurl , (error, meta, body) ->
                     if error
                         console.log "ERROR", error.message || error
-                        console.log "ERROR"
                     else
                         #console.log meta
                         answer = JSON.parse(body)   #body.toString()

@@ -55,6 +55,50 @@ app.post('/chk', function(req, res) {
     })
 })
 
+var db = require('mongoskin').db('8b2qv5kfx2imv:7okgyd5s6d2@127.0.0.1:20088/mYoQDTSPcCca?auto_reconnect')
+var chked = db.collection('chked')
+app.post('/qchk', function(req, res) {
+    var uri = req.body.uri.split("/" ,3)[2]
+    console.log(uri)
+    var timestamp = Date.parse(new Date())/1000+".512"
+    var phishcode = "NULL"
+    var clientip = req.header('x-forwarded-for') || req.connection.remoteAddress
+    chked.find({'uri':uri}).toArray(function(err, result) {
+        if(err){
+            console.log(err)
+        }else{
+            if(result.length === 0){
+                // not chk ever
+                console.log("%s \n\tnever chk,ask KSC now!" ,uri)
+                var askurl = checkForValidUrl("http://"+uri)
+                fetch(ASKHOST+askurl , function(error, meta, body){
+                    if(error){
+                        console.log("ERROR", error.message || error)
+                    }else{
+                        var answer = JSON.parse(body)
+                        console.log(answer)
+                        var phishcode = answer.phish
+                        var doc = {'uri': uri
+                            ,'timestamp': timestamp
+                            ,'clientip': clientip
+                            ,'phishcode': phishcode
+                            }
+                        console.log(doc)
+                        chked.insert(doc)
+                        res.send("/cnk KSC::\t"+PHISHTYPE(phishcode))
+                    } 
+                })
+            }else{
+                // had chk.ed
+                console.log("%s \n\thad chk.ed,return from MongoDB ;=)" ,uri)
+                console.log(result)
+                console.log("/cnk KSC::\t"+PHISHTYPE(result[0].phishcode))
+                res.send("/cnk KSC::\t"+PHISHTYPE(result[0].phishcode))
+            }
+        }
+    })
+})
+
 app.listen(8001)
 console.log("Express server listening on port %d in %s mode",app.address().port, app.settings.env)
 
