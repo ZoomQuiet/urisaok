@@ -21,6 +21,36 @@
 
 ## 发布
 
+### http://urisago1.appsp0t.com
+
+当前接口:
+
+- http://urisago1.appsp0t.com
+    
+    - POST 想查询的 URL
+    - 从金山云安全服务 返回是否安全
+
+
+
+### http://urisaok.appsp0t.com
+
+当前接口:
+
+- http://urisaok.appsp0t.com
+    
+    - POST 想查询的 URL
+    - 从金山云安全服务 返回是否安全
+
+
+### http://py.kingsoft.net:8008/=/
+
+当前接口:
+
+- http://py.kingsoft.net:8008/=/
+    
+    - POST 想查询的 URL
+    - 从金山云安全服务 返回是否安全
+
 
 ### http://urisaok.cnodejs.net
 
@@ -76,27 +106,6 @@ https://github.com/ZoomQuiet/urisaok
 
     +-- master  供给 NAE
     +-- no.de   供给 no.de
-
-### Hg
-以py 为主要开发工具的成果收集在 bitbucket.org 以 Mercurial 进行控制:
-
-- 利用Hg 的分支功能,针对不同目的的代码进行了组织:
-- https://bitbucket.org/ZoomQuiet/ok.urisa
-
-```
-    +-- default     默认分支包含主要的文档
-    +-- GAE         可部署在GAE上的版本
-    +-- SAE         可部署在SAE上的版本
-    +-- NAE         可部署在NAE上的版本
-    +-- bootle      本地的web srv. 版本
-    +-- tools       周边应用工具
-```
-
-
-## 记要
-
-    120414  Zoom.Quiet 和 NAE 环境
-    120214  Zoom.Quiet 和no.de 生产仓库同步
-    120212  Zoom.Quiet 迁移到 github
-    110323  Zoom.Quiet 创建
+    +-- GAEv*   供给 GAE不同版本
+    +-- openresty   供给 本地的 openresty lua 脚本
 
