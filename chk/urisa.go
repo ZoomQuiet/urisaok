@@ -1,4 +1,4 @@
-package hollo
+package urisa
 
 import (
     "fmt"
@@ -28,6 +28,7 @@ func help(w http.ResponseWriter, r *http.Request) {
 }
 const usageHelp = `
 URIsA ~ KSC 4 GAE powdered by go1
+{12.05.4}
 usage:
     $ curl -d "uri=http://sina.com" urisago1.appsp0t.com/chk
 `
