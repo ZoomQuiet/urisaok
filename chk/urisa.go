@@ -139,9 +139,9 @@ func qchk(w http.ResponseWriter, r *http.Request) {
     url := r.FormValue("uri")
     //c.Infof("r.RemoteAddr %v", r.RemoteAddr)
     //key := url
-    key := datastore.NewKey(c, "Uri", url, 0, nil)
+    ukey := datastore.NewKey(c, "Uri", url, 0, nil)
     var e2 Chked
-    if err := datastore.Get(c, key, &e2); err != nil {
+    if err := datastore.Get(c, ukey, &e2); err != nil {
         fmt.Fprint(w, "~ ", err.Error() , "\n")
 
         //panic(err)
@@ -156,16 +156,25 @@ func qchk(w http.ResponseWriter, r *http.Request) {
             Phish:  p,
             Tstamp: time.Now(),
             Cip:    r.RemoteAddr,
-        }    
-        key, err = datastore.Put(c, datastore.NewIncompleteKey(c, "chked", nil), &e1)
+        }
+        /*
+        if ukey, err = datastore.DecodeKey(url); err != nil {
+            fmt.Fprint(w, "datastore.DecodeKey~ ", err.Error() , "\n")
+        }
+        */
+        //key, err = datastore.Put(c, datastore.NewIncompleteKey(c, "chked", nil), &e1)
+        ukey, err = datastore.Put(c, ukey, &e1)
         if err != nil {
             http.Error(w, err.Error(), http.StatusInternalServerError)
             return
         }
 
+        fmt.Fprint(w, "ask KCS API srv.\n")
         fmt.Fprint(w, "/qchk(KCS):\t" + PHISHID[p])
 
     }else{
+        c.Infof("datastore ukey=%v", ukey.String())
+
         fmt.Fprint(w, "datastore Get OK;-) \n")
         c.Infof("co4 datastore:%v \t Phish:%s", e2.Phish ,PHISHID[e2.Phish])
 
