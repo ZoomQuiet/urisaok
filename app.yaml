@@ -1,5 +1,9 @@
 application: urisago1
+<<<<<<< HEAD
 version: 3
+=======
+version: 2
+>>>>>>> GAEv2
 runtime: go
 api_version: go1
 
