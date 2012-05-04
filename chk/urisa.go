@@ -16,6 +16,8 @@ import (
     
     "appengine"
     "appengine/urlfetch"
+    "appengine/datastore"
+//    "appengine/user"
 )
 
 func init() {
@@ -51,7 +53,6 @@ type KSC struct {
     Phish   int //`json:"phish"`
     Msg     string //`json:"msg"`
 }
-
 func _genKSCuri(url string) string {
     println("url len~\t ", len(url))
     //dst := make([]byte, 256) //<~ 整来的代码,不理解,就一定会出问题...
@@ -93,18 +94,102 @@ func _genKSCuri(url string) string {
     return api_url
 }
 
+func _asKSC(uri string, r *http.Request) (int, int) {
+    c := appengine.NewContext(r)
+    client := urlfetch.Client(c)
+    resp, err := client.Get(uri)
+    if err != nil {
+        panic(err)
+        //http.Error(w, err.Error(), http.StatusInternalServerError)
+        //return
+    }
+    c.Infof("HTTP GET returned status %v", resp.Status)
+    if resp.StatusCode != 200 {
+        panic(err)
+        c.Infof("couldn't get sale data %v", http.StatusInternalServerError)
+        //http.Error(w, "couldn't get sale data", http.StatusInternalServerError)
+        //return
+    }
+    defer resp.Body.Close()
+    c.Infof("resp.ContentLength %v", resp.ContentLength)
+    var buf []byte
+    buf, _ = ioutil.ReadAll(resp.Body)
+    c.Infof("resp.Body %v", string(buf))
+
+    result := &KSC{}
+    err = json.Unmarshal(buf, result)
+    if err != nil {
+        panic(err)
+        //http.Error(w, err.Error(), http.StatusInternalServerError)
+        //return
+    }
+    
+    return result.Success, result.Phish
+}
+
+
+type Chked struct {
+    Uri     string
+    Phish    int
+    Tstamp  time.Time
+    Cip     string
+}
 func qchk(w http.ResponseWriter, r *http.Request) {
     c := appengine.NewContext(r)
     url := r.FormValue("uri")
+    //c.Infof("r.RemoteAddr %v", r.RemoteAddr)
+    //key := url
+    key := datastore.NewKey(c, "Uri", url, 0, nil)
+    var e2 Chked
+    if err := datastore.Get(c, key, &e2); err != nil {
+        fmt.Fprint(w, "~ ", err.Error() , "\n")
 
-    c.Infof("genKSCuri(url) %v", _genKSCuri(url))
-    fmt.Fprint(w, "/qchk(KCS):\t" + url)
+        //panic(err)
+        c.Infof("Get Err.~\n\t !!! %v", err.Error())
+        //http.Error(w, err.Error(), http.StatusInternalServerError)
+        //return
+        api_url := _genKSCuri(url)
+        _,p := _asKSC(api_url, r)
+        //c.Infof("Success:%v \t Phish:%s", s ,PHISHID[p])
+        e1 := Chked{
+            Uri:    url,
+            Phish:  p,
+            Tstamp: time.Now(),
+            Cip:    r.RemoteAddr,
+        }    
+        key, err = datastore.Put(c, datastore.NewIncompleteKey(c, "chked", nil), &e1)
+        if err != nil {
+            http.Error(w, err.Error(), http.StatusInternalServerError)
+            return
+        }
+
+        fmt.Fprint(w, "/qchk(KCS):\t" + PHISHID[p])
+
+    }else{
+        fmt.Fprint(w, "datastore Get OK;-) \n")
+        c.Infof("co4 datastore:%v \t Phish:%s", e2.Phish ,PHISHID[e2.Phish])
+
+        fmt.Fprint(w, "/qchk(GAE):\t" + PHISHID[e2.Phish])
+    }
+    //c.Infof("c2.Pish[4datastore] %v", c2.Pish)
+    //c.Infof("genKSCuri(url) %v", _genKSCuri(url))
+
+    //fmt.Fprint(w, "/qchk(KCS):\t" + url)
 }
+
 func chk(w http.ResponseWriter, r *http.Request) {
     c := appengine.NewContext(r)
     url := r.FormValue("uri")
     
     api_url := _genKSCuri(url)
+
+    s,p := _asKSC(api_url, r)
+    c.Infof("Success:%v \t Phish:%s", s ,PHISHID[p])
+
+    fmt.Fprint(w, "/chk(KCS):\t" + PHISHID[p])
+}
+
+/*
     client := urlfetch.Client(c)
     resp, err := client.Get(api_url)
     if err != nil {
@@ -132,11 +217,6 @@ func chk(w http.ResponseWriter, r *http.Request) {
     //c.Infof("PHISHID:\t %v %v", result.Phish, PHISHID[0])
     pishmsg, _ := PHISHID[result.Phish]
     
-    c.Infof("Success:%v \n Phish:%s", result.Success ,pishmsg)
-
-    fmt.Fprint(w, "/chk(KCS):\t" + pishmsg)
-    }
-/*
 def __genQueryArgs(api_path, url):
     args = "appkey=" + cfg.APPKEY
     args += "&q=" + base64.urlsafe_b64encode(url)
