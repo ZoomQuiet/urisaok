@@ -43,10 +43,10 @@ var SECRET  = "99fc9fdbc6761f7d898ad25762407373"
 var APIHOST = "open.pc120.com"
 var APITYPE = "/phish/"
 var PHISHID = map[int] string {
-    -1:   "UNKNOW",
-    0:    "GOOD",
-    1:    "PHISH!",
-    2:    "MAYBE...",
+    -1:   "未知",
+    0:    "好站",
+    1:    "钓鱼!",
+    2:    "也许...",
 }
 type KSC struct {
     Success int    //`json:"success"`
