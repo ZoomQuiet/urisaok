@@ -3,7 +3,7 @@ package hollo
 import (
     "fmt"
     "net/http"
-//    "time" 
+
     "appengine"
 )
 
@@ -13,7 +13,7 @@ func init() {
 
 func help(w http.ResponseWriter, r *http.Request) {
     c := appengine.NewContext(r)
-    c.Infof("ZQ as::logging for debug as [INFO]")
+    c.Infof("logging for debug as [INFO]")
     fmt.Fprint(w, usageHelp)
 }
 const usageHelp = `
