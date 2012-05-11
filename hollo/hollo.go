@@ -18,5 +18,5 @@ func help(w http.ResponseWriter, r *http.Request) {
 }
 const usageHelp = `
 URIsA ~ KSC 4 GAE powdered by go1
-{12.04.26}
+{12.05.10}
 `
