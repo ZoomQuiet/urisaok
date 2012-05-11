@@ -3,15 +3,13 @@ package urisa
 import (
     "fmt"
     "net/http"
-    "encoding/json"
-    "io/ioutil"
     "time"
     "strconv"
-//    "strings"
-//    "bytes"
-    "encoding/base64"
     "io"
+    "io/ioutil"
     "encoding/hex"
+    "encoding/json"
+    "encoding/base64"
     "crypto/md5"
     
     "appengine"
@@ -47,14 +45,12 @@ var PHISHID = map[int] string {
 func chk(w http.ResponseWriter, r *http.Request) {
     c := appengine.NewContext(r)
     url := r.FormValue("uri")
-    c.Infof("url len~\t %v\n", len(url))
-    //dst := make([]byte, 256) //<~ 整来的代码,不理解,就一定会出问题...
-    //bin := []byte(url)
+    //c.Infof("url len~\t %v\n", len(url))
     maxEncLen := base64.URLEncoding.EncodedLen(len([]byte(url))) 
     c.Infof("maxEncLen~\t %v\n", maxEncLen)
-    //dst := make([]byte, 256) //<~ 整来的代码,不理解,就一定会出问题...
     dst := make([]byte, maxEncLen) //<~ 整来的代码,不理解,就一定会出问题...
-    //var dst []byte
+    //dst := make([]byte, 256) //<~ 整来的代码,不理解,就一定会出问题...
+    
     base64.URLEncoding.Encode(dst, []byte(url))
     //c.Infof("EncodedLen~ %v\n", base64.URLEncoding.EncodedLenlen(len(url)))
     c.Infof("base64~\t %v\n", string(dst))
@@ -106,11 +102,12 @@ func chk(w http.ResponseWriter, r *http.Request) {
         Phish   int //`json:"phish"`
         Msg     string //`json:"msg"`
     }
+    //fmt.Fprint(w, "/chk(KCS):\t[DEBUG]")
     result := &KSC{}
     err = json.Unmarshal(buf, result)
     if err != nil {
-        panic(err)
-        //http.Error(w, err.Error(), http.StatusInternalServerError)
+        //panic(err)
+        http.Error(w, err.Error(), http.StatusInternalServerError)
         return
     }
     //c.Infof("PHISHID:\t %v %v", result.Phish, PHISHID[0])
@@ -118,8 +115,11 @@ func chk(w http.ResponseWriter, r *http.Request) {
     c.Infof("Success:%v \n Phish:%s", result.Success ,pishmsg)
 
     fmt.Fprint(w, "/chk(KCS):\t" + pishmsg)
+
     }
 /*
+
+
 def __genQueryArgs(api_path, url):
     args = "appkey=" + cfg.APPKEY
     args += "&q=" + base64.urlsafe_b64encode(url)
