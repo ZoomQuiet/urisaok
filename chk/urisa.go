@@ -3,6 +3,7 @@ package urisa
 import (
     "fmt"
     "net/http"
+/**/
     "time"
     "strconv"
     "io"
@@ -11,7 +12,7 @@ import (
     "encoding/json"
     "encoding/base64"
     "crypto/md5"
-    
+/**/    
     "appengine"
     "appengine/urlfetch"
 )
@@ -45,6 +46,8 @@ var PHISHID = map[int] string {
 func chk(w http.ResponseWriter, r *http.Request) {
     c := appengine.NewContext(r)
     url := r.FormValue("uri")
+    //c.Infof("url~\t %v\n", url)
+    /**/
     //c.Infof("url len~\t %v\n", len(url))
     maxEncLen := base64.URLEncoding.EncodedLen(len([]byte(url))) 
     c.Infof("maxEncLen~\t %v\n", maxEncLen)
@@ -64,7 +67,8 @@ func chk(w http.ResponseWriter, r *http.Request) {
     now := time.Now()
     //c.Infof("%v , %v", now.Unix(), now.UnixNano())
     nano := strconv.FormatInt(now.UnixNano(),10)
-    //c.Infof("timestamp ~ %v.%v", nano[0:10],nano[10:13])
+    //nano := string(now.UnixNano())
+    c.Infof("timestamp ~ %v %v.%v", nano, nano[0:10],nano[10:13])
     args += "&timestamp=" + nano[0:10] + "." + nano[10:13]
     sign_base_string := APITYPE + "?" + args 
     c.Infof("sign_base_string~\t %v\n", sign_base_string)
@@ -81,7 +85,9 @@ func chk(w http.ResponseWriter, r *http.Request) {
     c.Infof("api_url~ \n%v", api_url)
     //APIHOST HOSTTRY
     client := urlfetch.Client(c)
-    resp, err := client.Get(api_url)
+    //resp, err := client.Get(api_url)
+    resp, err := client.Get("http://open.pc120.com/phish/")
+    
     if err != nil {
         http.Error(w, err.Error(), http.StatusInternalServerError)
         return
@@ -98,9 +104,9 @@ func chk(w http.ResponseWriter, r *http.Request) {
     c.Infof("resp.Body %v", string(buf))
 
     type KSC struct {
-        Success int    //`json:"success"`
-        Phish   int //`json:"phish"`
-        Msg     string //`json:"msg"`
+        Success int     //`json:"success"`
+        Phish   int     //`json:"phish"`
+        Msg     string  //`json:"msg"`
     }
     //fmt.Fprint(w, "/chk(KCS):\t[DEBUG]")
     result := &KSC{}
@@ -115,11 +121,10 @@ func chk(w http.ResponseWriter, r *http.Request) {
     c.Infof("Success:%v \n Phish:%s", result.Success ,pishmsg)
 
     fmt.Fprint(w, "/chk(KCS):\t" + pishmsg)
+    /**/
+}
 
-    }
 /*
-
-
 def __genQueryArgs(api_path, url):
     args = "appkey=" + cfg.APPKEY
     args += "&q=" + base64.urlsafe_b64encode(url)
