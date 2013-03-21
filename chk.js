@@ -11,7 +11,7 @@ app.configure (function() {
 })
 
 app.get("/", function(req, res) {
-    res.send("Hollo there! \n this is URIsaOK v12.02.26, usage as:\n$ curl --data 'uri=http://douban.com' http://urisaok.cnodejs.net/chk\nor\n$ curl --data 'uri=http://douban.com' http://urisaok.cnodejs.net/qchk\n~ use loc MongoDB quickly return checked uri KSC result ;-)\n doc: https://github.com/ZoomQuiet/urisaok")
+    res.send("Hollo there! \n this is URIsaOK v12.04.19, usage as:\n$ curl --data 'uri=http://douban.com' http://urisaok.cnodejs.net/chk\nor\n$ curl --data 'uri=http://douban.com' http://urisaok.cnodejs.net/qchk\n~ use loc MongoDB quickly return checked uri KSC result ;-)\n doc: https://github.com/ZoomQuiet/urisaok")
 })
 
 var APPKEY = "k-60666"
@@ -93,7 +93,7 @@ app.post('/qchk', function(req, res) {
                 console.log("%s \n\thad chk.ed,return from MongoDB ;=)" ,uri)
                 console.log(result)
                 console.log("/cnk KSC::\t"+PHISHTYPE(result[0].phishcode))
-                res.send("/cnk KSC::\t"+PHISHTYPE(result[0].phishcode))
+                res.send("/cnk (Mongo)::\t"+PHISHTYPE(result[0].phishcode))
             }
         }
     })
